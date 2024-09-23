@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class MockController {
 
-    val logger = KotlinLogging.logger {  }
+    val logger = KotlinLogging.logger { }
 
     @GetMapping("/**")
     fun handleGet(
