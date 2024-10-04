@@ -40,5 +40,23 @@
     "nth-check": "^2.1.1",
     "postcss": "^8.4.47",
     "react-scripts": "^5.0.1"
+  },
+  "overrides": {
+    "svgo": {
+      "nth-check": ">=2.0.2"
+    },
+    "react-scripts": {
+      "postcss": ">=8.4.31",
+      "workbox-webpack-plugin": ">=7.1.0"
+    },
+    "workbox-build": {
+      "rollup": ">=3.29.5"
+    },
+    "@rollup/plugin-babel": {
+      "rollup": ">=3.29.5"
+    },
+    "@rollup/plugin-replace": {
+      "rollup": ">=3.29.5"
+    }
   }
 }
