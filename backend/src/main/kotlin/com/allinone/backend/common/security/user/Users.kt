@@ -37,6 +37,6 @@ class Users(
     )
 
     override fun toString(): String {
-        return "Users(id=$id, username='$username', email='$userEmail', password='$password', phoneNumber='$phoneNumber', userRole=$userRole)"
+        return "Users(id=$id, username='$username', userEmail='$userEmail', password='$password', phoneNumber='$phoneNumber', userRole=$userRole)"
     }
 }

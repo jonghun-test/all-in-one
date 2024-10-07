@@ -65,4 +65,18 @@ class UserController(
 
         return ResponseEntity.ok(user)
     }
+
+    @PostMapping("/loginProc")
+    fun loginOk(@RequestBody users: Users): ResponseEntity<Map<String, String>> {
+
+        logger.info { "loginProc: ${users}" }
+
+        val user = userService.getUserInfo(users.userEmail) ?: throw RuntimeException("사용자 없음")
+
+        val userInfo: MutableMap<String, String> = HashMap()
+        userInfo["email"] = user.userEmail
+        userInfo["authorities"] = user.userRole?: ""
+
+        return ResponseEntity.ok(userInfo)
+    }
 }
