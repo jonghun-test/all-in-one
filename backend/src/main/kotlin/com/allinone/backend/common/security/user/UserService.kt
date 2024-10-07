@@ -21,6 +21,6 @@ class UserService(
     }
 
     fun getUserInfo(email: String): Users? {
-        return userRepository.findByEmail(email)
+        return userRepository.findByUserEmail(email)
     }
 }

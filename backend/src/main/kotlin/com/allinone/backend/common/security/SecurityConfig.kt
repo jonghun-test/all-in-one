@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.*
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
@@ -22,28 +23,35 @@ class SecurityConfig {
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        http
-            .csrf { it.disable() }
-            .httpBasic { it.disable() }
-            .formLogin { it.disable() }
-            .authorizeHttpRequests { request ->
-                request.anyRequest().anonymous()
+        return http
+//            .csrf { it.disable() }
+//            .httpBasic { it.disable() }
+//            .formLogin { it.disable() }
+
+            .formLogin { formLogin ->
+                formLogin
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/loginOk")
             }
-            .logout {
-                it
-                    .logoutSuccessUrl("/login")
+            .logout { logout ->
+                logout
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/logoutOk")
                     .invalidateHttpSession(true)
             }
-            .formLogin {
+            .addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter::class.java)
+            .csrf { it.disable() }
+            .authorizeHttpRequests {
                 it
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/home")
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/user/**").authenticated()
+                    .anyRequest().anonymous()
             }
-            .sessionManagement {
-                it
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            }
-        return http.build()
+            .orBuild
+//            .sessionManagement {
+//                it
+//                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//            }
     }
 
     @Bean
