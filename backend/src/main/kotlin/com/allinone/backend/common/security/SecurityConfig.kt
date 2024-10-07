@@ -41,6 +41,7 @@ class SecurityConfig {
             }
             .addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter::class.java)
             .csrf { it.disable() }
+            //.addFilter(corsFilter())
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/admin/**").hasRole("ADMIN")

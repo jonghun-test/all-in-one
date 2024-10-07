@@ -63,6 +63,11 @@ class UserController(
         // 유저 정보
         val user = userService.getUserInfo(email)
 
+        logger.info { authentication }
+        logger.info { email }
+        logger.info { user }
+
+
         return ResponseEntity.ok(user)
     }
 
