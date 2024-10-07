@@ -24,30 +24,32 @@ class SecurityConfig {
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http
-//            .csrf { it.disable() }
+            .csrf { it.disable() }
 //            .httpBasic { it.disable() }
 //            .formLogin { it.disable() }
-
+            .authorizeHttpRequests {
+                it
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/user/**").authenticated()
+                    .anyRequest().permitAll()
+            }
             .formLogin { formLogin ->
                 formLogin
                     .loginPage("/login")
+                    .loginProcessingUrl("/loginProc")
+                    .usernameParameter("email")
                     .defaultSuccessUrl("/loginOk")
             }
             .logout { logout ->
                 logout
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/logoutOk")
-                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+//                    .invalidateHttpSession(true)
             }
             .addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter::class.java)
-            .csrf { it.disable() }
             //.addFilter(corsFilter())
-            .authorizeHttpRequests {
-                it
-                    .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .requestMatchers("/user/**").authenticated()
-                    .anyRequest().anonymous()
-            }
+
             .orBuild
 //            .sessionManagement {
 //                it

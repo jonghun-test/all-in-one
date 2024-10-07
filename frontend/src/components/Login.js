@@ -6,7 +6,7 @@ function Login() {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
-    userEmail: '',
+    email: '',
     password: '',
   });
 
@@ -19,15 +19,15 @@ function Login() {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('userEmail', user.userEmail);
+      formData.append('email', user.email);
       formData.append('password', user.password);
 
       const response = await axios({
         url: 'http://localhost:10000/loginProc',
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        // headers: {
+        //   'Content-Type': 'application/json'
+        // },
         data: formData,
         withCredentials: true,
       });
@@ -46,7 +46,7 @@ function Login() {
     <div>
       <h3>로그인</h3>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="userEmail" placeholder="이메일" value={user.userEmail} onChange={handleChange} />
+        <input type="text" name="email" placeholder="이메일" value={user.email} onChange={handleChange} />
         <input type="password" name="password" placeholder="비밀번호" value={user.password} onChange={handleChange} />
         <button type="submit">로그인</button>
       </form>

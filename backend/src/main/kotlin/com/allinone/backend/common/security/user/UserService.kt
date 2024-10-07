@@ -15,7 +15,7 @@ class UserService(
         val encPassword = BCryptPasswordEncoder().encode(rawPassword)
 
         users.password = encPassword
-        users.userRole = "ROLE_USER"
+        users.role = "ROLE_USER"
 
         userRepository.save(users)
     }

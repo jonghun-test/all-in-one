@@ -20,7 +20,7 @@ class UserController(
     @PostMapping("/join")
     fun join(@RequestBody users: Users): ResponseEntity<Void> {
         logger.info { "회원가입 컨트롤러 실행$users" }
-        userService.joinUser(users.toEntity())
+        userService.joinUser(users)
         logger.info { "회원가입 완료" }
         return ResponseEntity.ok().build()
     }
@@ -71,17 +71,17 @@ class UserController(
         return ResponseEntity.ok(user)
     }
 
-    @PostMapping("/loginProc")
-    fun loginOk(@RequestBody users: Users): ResponseEntity<Map<String, String>> {
-
-        logger.info { "loginProc: ${users}" }
-
-        val user = userService.getUserInfo(users.userEmail) ?: throw RuntimeException("사용자 없음")
-
-        val userInfo: MutableMap<String, String> = HashMap()
-        userInfo["email"] = user.userEmail
-        userInfo["authorities"] = user.userRole?: ""
-
-        return ResponseEntity.ok(userInfo)
-    }
+//    @PostMapping("/loginProc")
+//    fun loginOk(@RequestBody users: Users): ResponseEntity<Map<String, String>> {
+//
+//        logger.info { "loginProc: ${users}" }
+//
+//        val user = userService.getUserInfo(users.userEmail) ?: throw RuntimeException("사용자 없음")
+//
+//        val userInfo: MutableMap<String, String> = HashMap()
+//        userInfo["email"] = user.userEmail
+//        userInfo["authorities"] = user.role?: ""
+//
+//        return ResponseEntity.ok(userInfo)
+//    }
 }
