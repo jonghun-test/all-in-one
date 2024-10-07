@@ -2,8 +2,10 @@ package com.allinone.backend.common.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.config.annotation.web.configurers.*
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -20,26 +22,32 @@ class SecurityConfig {
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        http.csrf { it.disable() }
+        http
+            .csrf { it.disable() }
             .httpBasic { it.disable() }
             .formLogin { it.disable() }
             .authorizeHttpRequests { request ->
                 request.anyRequest().anonymous()
             }
-            .logout { logout: LogoutConfigurer<HttpSecurity?> ->
-                logout
+            .logout {
+                it
                     .logoutSuccessUrl("/login")
                     .invalidateHttpSession(true)
             }
-            .sessionManagement { session: SessionManagementConfigurer<HttpSecurity?> ->
-                session
+            .formLogin {
+                it
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/home")
+            }
+            .sessionManagement {
+                it
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
         return http.build()
     }
 
     @Bean
-    fun encoder(): BCryptPasswordEncoder {
+    fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
     }
 

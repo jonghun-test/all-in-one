@@ -1,26 +1,29 @@
-package com.allinone.backend.common.security
+package com.allinone.backend.common.security.user
 
 import com.samsungfire.chac.admin.api.entities.common.DateAudit
 import jakarta.persistence.*
 
-@Entity(name = "USERS")
-class Users(
+@Entity(name = "USER")
+class User(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    val id: Long? = null,
+    var id: Long? = null,
 
     @Column(name = "username", nullable = false)
-    val username: String = "",
+    var username: String = "",
 
     @Column(name = "email", nullable = false)
-    val email: String = "",
+    var email: String = "",
 
     @Column(name = "password", nullable = false)
-    val password: String = "",
+    var password: String = "",
 
     @Column(name = "phoneNumber", nullable = false)
-    val phoneNumber: String = "",
+    var phoneNumber: String = "",
+
+    @Column(name="roles", nullable = true)
+    var role: String? = null,
 
 ): DateAudit()
