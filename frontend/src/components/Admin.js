@@ -7,7 +7,7 @@ function Admin() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/admin', {
+        const response = await axios.get('http://localhost:10000/admin', {
           withCredentials: true, // 자격 증명(쿠키, 인증 헤더 등)을 포함하여 HTTP 요청
         });
         if (response.status === 200) {

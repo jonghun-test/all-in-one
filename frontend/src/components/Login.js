@@ -23,7 +23,7 @@ function Login() {
       formData.append('password', user.password);
 
       const response = await axios({
-        url: 'http://localhost:8080/loginProc',
+        url: 'http://localhost:10000/loginProc',
         method: 'POST',
         data: formData,
         withCredentials: true,

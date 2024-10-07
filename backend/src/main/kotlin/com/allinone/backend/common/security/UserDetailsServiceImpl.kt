@@ -24,7 +24,7 @@ class UserDetailsServiceImpl(
         return User(
             user.email,
             user.password,
-            arrayListOf(SimpleGrantedAuthority(user.role))
+            arrayListOf(SimpleGrantedAuthority(user.userRole))
         )
     }
 }

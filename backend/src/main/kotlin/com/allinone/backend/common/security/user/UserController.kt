@@ -18,9 +18,9 @@ class UserController(
     val logger = KotlinLogging.logger {}
 
     @PostMapping("/join")
-    fun join(@RequestBody user: User): ResponseEntity<Void> {
-        logger.info { "회원가입 컨트롤러 실행$user" }
-        userService.joinUser(user)
+    fun join(@RequestBody users: Users): ResponseEntity<Void> {
+        logger.info { "회원가입 컨트롤러 실행$users" }
+        userService.joinUser(users.toEntity())
         logger.info { "회원가입 완료" }
         return ResponseEntity.ok().build()
     }
@@ -54,7 +54,7 @@ class UserController(
     }
 
     @GetMapping("/user")
-    fun getUserPage(): ResponseEntity<User> {
+    fun getUserPage(): ResponseEntity<Users> {
         logger.info { "일반 인증 성공" }
 
         val authentication: Authentication = SecurityContextHolder.getContext().authentication

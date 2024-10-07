@@ -1,4 +1,4 @@
-package com.samsungfire.chac.admin.api.entities.common
+package com.allinone.backend.common.additional.audits
 
 import jakarta.persistence.*
 import org.springframework.data.annotation.LastModifiedDate

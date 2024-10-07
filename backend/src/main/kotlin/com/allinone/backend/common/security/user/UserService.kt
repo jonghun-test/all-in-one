@@ -1,6 +1,5 @@
 package com.allinone.backend.common.security.user
 
-import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -10,18 +9,18 @@ class UserService(
     private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ) {
 
-    fun joinUser(user: User){
+    fun joinUser(users: Users){
 
-        val rawPassword = user.password
+        val rawPassword = users.password
         val encPassword = BCryptPasswordEncoder().encode(rawPassword)
 
-        user.password = encPassword
-        user.role = "ROLE_USER"
+        users.password = encPassword
+        users.userRole = "ROLE_USER"
 
-        userRepository.save(user)
+        userRepository.save(users)
     }
 
-    fun getUserInfo(email: String): User? {
+    fun getUserInfo(email: String): Users? {
         return userRepository.findByEmail(email)
     }
 }
