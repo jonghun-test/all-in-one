@@ -26,7 +26,7 @@ class Users(
     @Column(name = "userRole", nullable = true)
     var userRole: String? = null
 
-)/* : DateAudit()*/ {
+) : DateAudit() {
 
     fun toEntity() = Users (
         username = this.username,
