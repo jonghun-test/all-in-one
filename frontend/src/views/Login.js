@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import UserInput from './components/UserInput'
 
 function Login() {
   const navigate = useNavigate();
@@ -46,8 +47,8 @@ function Login() {
     <div>
       <h3>로그인</h3>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="email" placeholder="이메일" value={user.email} onChange={handleChange} />
-        <input type="password" name="password" placeholder="비밀번호" value={user.password} onChange={handleChange} />
+        <UserInput type="text" name="email" placeholder="이메일" value={user.email} onChange={handleChange} />
+        <UserInput type="password" name="password" placeholder="비밀번호" value={user.password} onChange={handleChange} />
         <button type="submit">로그인</button>
       </form>
       <Link to="/join">
