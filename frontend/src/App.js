@@ -1,19 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import './App.css';
+import Main from './views/Main';
 
 function App() {
-  const [data, setData] = useState('')
-
-  useEffect(() => {
-    axios.get('/api/data')
-        .then(res => setData(res.data))
-        .catch(err => console.log(err))
-  }, []);
-
   return (
-      <div>
-        받아온 값 : {data}
-      </div>
+    <div>
+      <h1>스프링부트-리액트 연동</h1>
+      <Main />
+    </div>
   );
 }
 
