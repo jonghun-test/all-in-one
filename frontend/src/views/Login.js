@@ -10,6 +10,7 @@ import {
     TextField,
     Typography
 } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
 function LoginView() {
     const navigate = useNavigate();
@@ -52,11 +53,14 @@ function LoginView() {
     };
 
     return (
-        <React.Fragment>
-            <Box
-                display="flex"
-            >
-                <Box m="auto" minWidth="500px" sx={{padding:'100px'}}>
+
+        <Box sx={{flexGrow: 1}}>
+            <Grid container spacing={3}>
+                <Grid size={3} offset={{md: 3}} style={{backgroundColor: '#FFFFF3'}} alignItems="center">
+                    Contents for this web
+                </Grid>
+                <Grid size={3}>
+                    <Box>
                         <Typography
                             component="h1"
                             variant="h4"
@@ -109,18 +113,20 @@ function LoginView() {
                             <Typography sx={{textAlign: 'center'}}>
                                 Don&apos;t have an account?{' '}
                                 <span>
-            <Link
-                variant="body2"
-                sx={{alignSelf: 'center'}}
-                to={"/join"}>
-              Sign up
-            </Link>
-          </span>
+                                        <Link
+                                            variant="body2"
+                                            sx={{alignSelf: 'center'}}
+                                            to={"/join"}>
+                                          Sign up
+                                        </Link>
+                                    </span>
                             </Typography>
                         </Box>
-                </Box>
-            </Box>
-        </React.Fragment>
+                    </Box>
+                </Grid>
+            </Grid>
+        </Box>
+
     );
 }
 
