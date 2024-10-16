@@ -56,7 +56,7 @@ function LoginView() {
 
         <Box sx={{flexGrow: 1}}>
             <Grid container spacing={3}>
-                <Grid size={3} offset={{md: 3}} style={{backgroundColor: '#FFFFF3'}} alignItems="center">
+                <Grid size={3} offset={{md: 3}} alignItems="center">
                     Contents for this web
                 </Grid>
                 <Grid size={3}>

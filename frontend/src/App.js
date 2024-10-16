@@ -1,5 +1,6 @@
 import './App.css';
 import Main from './views/Main';
+import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 
 // to apply roboto font with weights, un-comment these imports.
 // import '@fontsource/roboto/300.css';
@@ -7,13 +8,20 @@ import Main from './views/Main';
 // import '@fontsource/roboto/500.css';
 // import '@fontsource/roboto/700.css';
 
-function App() {
-  return (
-    <div>
-      <h1>스프링부트-리액트 연동</h1>
-      <Main />
-    </div>
-  );
-}
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    }
+})
 
-export default App;
+export default function App() {
+    return (
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline/>
+            <div>
+                <h1>all-in-one</h1>
+                <Main/>
+            </div>
+        </ThemeProvider>
+    );
+}
